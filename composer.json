@@ -1,0 +1,23 @@
+{
+    "name": "conorsmith/twersona",
+    "description": "A library to watch a Twitter profile for any updates to profile information",
+    "version": "0.1.0",
+    "keywords": ["twitter", "profile"],
+    "homepage": "https://github.com/conorsmith/twersona",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Conor Smith",
+            "email": "conor@tercet.io",
+            "homepage": "http://conorsmith.ie"
+        }
+    ],
+    "require": {
+        "j7mbo/twitter-api-php": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Twersona\\": "src/"
+        }
+    }
+}
