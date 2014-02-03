@@ -7,7 +7,7 @@ class ProfileMapper
     protected $twitter;
     protected $storer;
 
-    public function __construct($connectionSettings, StorerInterface $storer = null)
+    public function __construct($connectionSettings, StorerInterface $storer)
     {
         if ($connectionSettings instanceof TwitterAPI) {
             $this->twitter = $connectionSettings;
@@ -19,11 +19,7 @@ class ProfileMapper
             throw new \InvalidArgumentException('The parameter was not an array or an instance of TwitterAPI');
         }
 
-        if (is_null($storer)) {
-            $this->storer = new FileStorer;
-        } else {
-            $this->storer = $storer;
-        }
+        $this->storer = $storer;
     }
 
     public function read()

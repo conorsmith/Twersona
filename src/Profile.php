@@ -2,6 +2,9 @@
 
 namespace Twersona;
 
+use League\Flysystem\Filesystem;
+use League\Flysystem\Adapter\Local as Adapter;
+
 class Profile
 {
     public $id;
@@ -46,7 +49,10 @@ class Profile
 
     public function __construct($twitterAPISettings)
     {
-        $this->mapper = new ProfileMapper($twitterAPISettings);
+        $filesystem = new Filesystem(new Adapter(__DIR__.'/..'));
+        $storer = new FileStorer($filesystem, 'storage/profile-cache');
+
+        $this->mapper = new ProfileMapper($twitterAPISettings, $storer);
         $this->parseData($this->mapper->read());
     }
 

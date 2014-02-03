@@ -63,14 +63,6 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function constructorAcceptsMissingSecondParam()
-    {
-        $profileMapper = new ProfileMapper($this->mockTwitter);
-    }
-
-    /**
-     * @test
-     */
     public function readReturnsCachedData()
     {
         $expectedData = '{"data":"A Twitter profile..."}';

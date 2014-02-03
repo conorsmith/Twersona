@@ -3,22 +3,16 @@
 namespace Twersona;
 
 use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local as Adapter;
 
 class FileStorer implements StorerInterface
 {
     protected $filesystem;
     protected $file;
 
-    public function __construct($file = null)
+    public function __construct(Filesystem $filesystem, $file)
     {
-        $this->filesystem = new Filesystem(new Adapter(__DIR__.'/..'));
-
-        if (is_null($file)) {
-            $this->file = 'storage/profile-cache';
-        } else {
-            $this->file = $file;
-        }
+        $this->filesystem = $filesystem;
+        $this->file = $file;
     }
 
     public function hasCachedData()
