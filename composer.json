@@ -20,5 +20,11 @@
         "psr-4": {
             "Twersona\\": "src/"
         }
-    }
+    },
+    "post-install-cmd": [
+        "chmod a+w vendor/conorsmith/twersona/storage/"
+    ],
+    "post-update-cmd": [
+        "chmod a+w vendor/conorsmith/twersona/storage/"
+    ],
 }
