@@ -9,9 +9,9 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->mockTwitter = $this->setUpMockTwitter();
-        $this->mockStorer = $this->setUpMockStorer();
+        $this->mockCache = $this->setUpMockCache();
 
-        $this->profileMapper = new ProfileMapper($this->mockTwitter, $this->mockStorer);
+        $this->profileMapper = new ProfileMapper($this->mockTwitter, $this->mockCache);
     }
 
     private function setUpMockTwitter()
@@ -22,12 +22,12 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-    private function setUpMockStorer()
+    private function setUpMockCache()
     {
-        return $this->getMockBuilder('Twersona\StorerInterface')
+        return $this->getMockBuilder('Twersona\CacheInterface')
             ->disableOriginalConstructor()
             ->setMethods(array(
-                'hasCachedData',
+                'hasData',
                 'fetch',
                 'store',
             ))
@@ -40,7 +40,7 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
      */
     public function constructorThrowsExceptionForInvalidFirstParam()
     {
-        $profileMapper = new ProfileMapper('Invalid param type', $this->mockStorer);
+        $profileMapper = new ProfileMapper('Invalid param type', $this->mockCache);
     }
 
     /**
@@ -56,7 +56,7 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
             'some_key' => 'some_value',
         );
 
-        $profileMapper = new ProfileMapper($connectionSettings, $this->mockStorer);
+        $profileMapper = new ProfileMapper($connectionSettings, $this->mockCache);
         */
     }
 
@@ -67,11 +67,11 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
     {
         $expectedData = '{"data":"A Twitter profile..."}';
 
-        $this->mockStorer->expects($this->once())
-            ->method('hasCachedData')
+        $this->mockCache->expects($this->once())
+            ->method('hasData')
             ->will($this->returnValue(true));
 
-        $this->mockStorer->expects($this->once())
+        $this->mockCache->expects($this->once())
             ->method('fetch')
             ->will($this->returnValue($expectedData));
 
@@ -91,15 +91,15 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
     {
         $expectedData = '{"data":"A Twitter profile..."}';
 
-        $this->mockStorer->expects($this->once())
-            ->method('hasCachedData')
+        $this->mockCache->expects($this->once())
+            ->method('hasData')
             ->will($this->returnValue(false));
 
         $this->mockTwitter->expects($this->once())
             ->method('getProfileData')
             ->will($this->returnValue($expectedData));
 
-        $this->mockStorer->expects($this->once())
+        $this->mockCache->expects($this->once())
             ->method('store')
             ->with($this->equalTo($expectedData));
 

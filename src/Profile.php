@@ -50,9 +50,9 @@ class Profile
     public function __construct($twitterAPISettings)
     {
         $filesystem = new Filesystem(new Adapter(__DIR__.'/..'));
-        $storer = new FileStorer($filesystem, 'storage/profile-cache');
+        $cache = new ProfileCache($filesystem, 'storage/profile-cache');
 
-        $this->mapper = new ProfileMapper($twitterAPISettings, $storer);
+        $this->mapper = new ProfileMapper($twitterAPISettings, $cache);
         $this->parseData($this->mapper->read());
     }
 

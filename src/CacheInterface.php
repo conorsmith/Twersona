@@ -2,9 +2,9 @@
 
 namespace Twersona;
 
-interface StorerInterface
+interface CacheInterface
 {
-    public function hasCachedData();
+    public function hasData();
 
     public function fetch();
 
