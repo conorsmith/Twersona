@@ -26,5 +26,5 @@
     ],
     "post-update-cmd": [
         "chmod a+w vendor/conorsmith/twersona/storage/"
-    ],
+    ]
 }
