@@ -28,7 +28,7 @@ echo $twitterProfile->screenName; // 'conorsmith'
 echo $twitterProfile->verified;    // false
 ```
 
-You can also return a profile object with the exact keys used by the Twitter API, which are camelCase.
+You can also return a profile object with the exact keys used by the Twitter API, which are not camelCase.
 
 ```
 $twitterProfile = $factory->buildFlatProfileWithExactKeys();
