@@ -16,7 +16,7 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
 
     private function setUpMockTwitter()
     {
-        return $this->getMockBuilder('Twersona\TwitterAPI')
+        return $this->getMockBuilder('Twersona\TwitterConsumer')
             ->disableOriginalConstructor()
             ->setMethods(array('getProfileData'))
             ->getMock();

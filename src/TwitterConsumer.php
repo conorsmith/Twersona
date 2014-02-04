@@ -4,7 +4,7 @@ namespace Twersona;
 
 use TwitterAPIExchange;
 
-class TwitterAPI
+class TwitterConsumer
 {
     protected $connection;
 

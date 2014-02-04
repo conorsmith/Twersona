@@ -9,14 +9,14 @@ class ProfileMapper
 
     public function __construct($connectionSettings, CacheInterface $cache)
     {
-        if ($connectionSettings instanceof TwitterAPI) {
+        if ($connectionSettings instanceof TwitterConsumer) {
             $this->twitter = $connectionSettings;
 
         } else if (is_array($connectionSettings)) {
-            $this->twitter = new TwitterAPI($connectionSettings);
+            $this->twitter = new TwitterConsumer($connectionSettings);
 
         } else {
-            throw new \InvalidArgumentException('The parameter was not an array or an instance of TwitterAPI');
+            throw new \InvalidArgumentException('The parameter was not an array or an instance of TwitterConsumer');
         }
 
         $this->cache = $cache;
