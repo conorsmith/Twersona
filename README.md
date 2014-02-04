@@ -52,7 +52,7 @@ $twitterProfile = $factory->buildProfile();
 
 echo $twitterProfile->name;       // 'Conor Smith'
 echo $twitterProfile->screenName; // 'conorsmith'
-echo $twitterProfile->verified;    // false
+echo $twitterProfile->verified;   // false
 ```
 
 You can also return a profile object with the exact keys used by the Twitter API, which are not camelCase.
