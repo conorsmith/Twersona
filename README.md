@@ -5,7 +5,7 @@ _This is very much a work in progress._
 
 ## Installation
 
-Install via [Composer](https://getcomposer.org/). You can use `dev-master` to get the latest release, but for a production release you should probably explicity enter a tag eg `v0.1.2`. Then just make sure your composer.json file looks something like this:
+Install via [Composer](https://getcomposer.org/). You can use `dev-master` to get the latest release, but for a production application you should probably explicitly enter a tag eg `v0.1.2`. Then just make sure your composer.json file looks something like this:
 
 ```
 {
@@ -17,7 +17,7 @@ Install via [Composer](https://getcomposer.org/). You can use `dev-master` to ge
 
 ### minimum-stability
 
-If you have set a `minimum-stability` in your composer.json file (eg a default Laravel composer.json file) you may experience issues attempting to install this package via composer. One of the dependencies of this package is [j7mbo/twitter-api-php](https://github.com/J7mbo/twitter-api-php), which has only a `dev-master` version available.
+If you have set a `minimum-stability` in your composer.json file (eg a default Laravel composer.json file) you may experience issues attempting to install this package via Composer. One of the dependencies of this package is [j7mbo/twitter-api-php](https://github.com/J7mbo/twitter-api-php), which has only a `dev-master` version available.
 
 According to [this Composer issue](https://github.com/composer/composer/issues/1478) the only way to satisfy your minimum stability in this case is to explictly require the dependency in your composer.json file. In that case your file should look something like this:
 
