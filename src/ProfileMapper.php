@@ -5,9 +5,9 @@ namespace Twersona;
 class ProfileMapper
 {
     protected $twitter;
-    protected $storer;
+    protected $cache;
 
-    public function __construct($connectionSettings, StorerInterface $storer = null)
+    public function __construct($connectionSettings, CacheInterface $cache)
     {
         if ($connectionSettings instanceof TwitterAPI) {
             $this->twitter = $connectionSettings;
@@ -19,21 +19,17 @@ class ProfileMapper
             throw new \InvalidArgumentException('The parameter was not an array or an instance of TwitterAPI');
         }
 
-        if (is_null($storer)) {
-            $this->storer = new FileStorer;
-        } else {
-            $this->storer = $storer;
-        }
+        $this->cache = $cache;
     }
 
     public function read()
     {
-        if ($this->storer->hasCachedData()) {
-            $data = $this->storer->fetch();
+        if ($this->cache->hasData()) {
+            $data = $this->cache->fetch();
 
         } else {
             $data = $this->twitter->getProfileData();
-            $this->storer->store($data);
+            $this->cache->store($data);
         }
 
         return $data;

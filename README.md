@@ -3,6 +3,14 @@ A library to watch a Twitter profile for any updates to profile information
 
 This is very much a work in progress.
 
+## Setup
+
+If you are using local file storage for caching (the default), ensure that the `storage` directory is writable.
+
+```
+chmod a+w vendor/conorsmith/twersona/storage/
+```
+
 ## Usage
 
 ```

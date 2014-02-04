@@ -1,7 +1,7 @@
 {
     "name": "conorsmith/twersona",
     "description": "A library to watch a Twitter profile for any updates to profile information",
-    "version": "0.1.0",
+    "version": "0.1.3",
     "keywords": ["twitter", "profile"],
     "homepage": "https://github.com/conorsmith/twersona",
     "license": "MIT",
