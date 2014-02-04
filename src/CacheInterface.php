@@ -4,7 +4,7 @@ namespace Twersona;
 
 interface CacheInterface
 {
-    public function isStale();
+    public function isStale($timestampToCheck = null);
 
     public function hasData();
 

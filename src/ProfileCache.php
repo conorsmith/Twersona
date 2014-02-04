@@ -14,17 +14,22 @@ class ProfileCache implements CacheInterface
     {
         $this->filesystem = $filesystem;
         $this->key = $key;
+        $this->maxAge = $maxAge;
     }
 
-    public function isStale()
+    public function isStale($timestampToCheck = null)
     {
         if (!$this->hasData()) {
             return true;
         }
 
+        if (is_null($timestampToCheck)) {
+            $timestampToCheck = time();
+        }
+
         $timestamp = $this->filesystem->getTimestamp($this->key);
 
-        return $timestamp + $this->maxAge <= time();
+        return $timestamp + $this->maxAge < $timestampToCheck;
     }
 
     public function hasData()
