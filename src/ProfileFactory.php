@@ -33,14 +33,12 @@ class ProfileFactory
 
     public function buildFlatProfile()
     {
-        $profileData = $this->getProfileData();
-        return new FlatProfile($profileData);
+        return new FlatProfile($this->getProfileData());
     }
 
     public function buildFlatProfileWithExactKeys()
     {
-        $profileData = $this->getProfileData();
-        return new FlatExactKeysProfile($profileData);
+        return new FlatExactKeysProfile($this->getProfileData());
     }
 
     protected function getProfileData()
