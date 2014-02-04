@@ -37,32 +37,6 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
-     */
-    public function constructorThrowsExceptionForInvalidFirstParam()
-    {
-        $profileMapper = new ProfileMapper('Invalid param type', $this->mockCache);
-    }
-
-    /**
-     * @test
-     */
-    public function constructorAcceptsArrayAsFirstParam()
-    {
-        /*
-        TODO - I'm not sure how to test this yet, the literal class name is
-               causing dependency issues. Perhaps a DIC is the solution?
-
-        $connectionSettings = array(
-            'some_key' => 'some_value',
-        );
-
-        $profileMapper = new ProfileMapper($connectionSettings, $this->mockCache);
-        */
-    }
-
-    /**
-     * @test
      */
     public function readReturnsCachedData()
     {

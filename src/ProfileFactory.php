@@ -23,7 +23,10 @@ class ProfileFactory
             $filesystem = new Filesystem(new Adapter(__DIR__.'/../storage'));
         }
 
-        $this->mapper = new ProfileMapper($twitterAPISettings, new ProfileCache($filesystem, $filesystemKey, $cacheMaxAge));
+        $this->mapper = new ProfileMapper(
+            new TwitterConsumer($twitterAPISettings),
+            new ProfileCache($filesystem, $filesystemKey, $cacheMaxAge)
+        );
     }
 
     public function buildProfile()
