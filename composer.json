@@ -13,6 +13,7 @@
         }
     ],
     "require": {
+    	"php": "5.4.0",
         "j7mbo/twitter-api-php": "dev-master",
         "league/flysystem": "0.2.*"
     },

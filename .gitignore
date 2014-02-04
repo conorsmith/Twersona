@@ -1,2 +1,6 @@
-/coverage/*
-/storage/*
+coverage
+storage
+vendor
+
+composer.lock
+index.php

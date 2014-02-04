@@ -1,12 +1,11 @@
 <?php
 
-namespace Twersona;
+namespace Twersona\Profile;
 
-use League\Flysystem\Filesystem;
-use League\Flysystem\Adapter\Local as Adapter;
-
-class Profile
+class FlatExactKeysProfile implements ProfileInterface
 {
+    use ProfileTrait;
+    
     public $id;
     public $id_str;
     public $name;
@@ -45,47 +44,7 @@ class Profile
     public $follow_request_sent;
     public $notifications;
 
-    protected $mapper;
-
-    public function __construct($twitterAPISettings)
-    {
-        $filesystem = new Filesystem(new Adapter(__DIR__.'/..'));
-        $cache = new ProfileCache($filesystem, 'storage/profile-cache');
-
-        $this->mapper = new ProfileMapper($twitterAPISettings, $cache);
-        $this->parseData($this->mapper->read());
-    }
-
-    public function getBiggerProfileImageURL()
-    {
-        return $this->getProfileImageURL('bigger', $this->profile_image_url);
-    }
-
-    public function getBiggerProfileImageHTTPSURL()
-    {
-        return $this->getProfileImageURL('bigger', $this->profile_image_url_https);
-    }
-
-    public function getMiniProfileImageURL()
-    {
-        return $this->getProfileImageURL('mini', $this->profile_image_url);
-    }
-
-    public function getMiniProfileImageHTTPSURL()
-    {
-        return $this->getProfileImageURL('mini', $this->profile_image_url_https);
-    }
-
-    protected function getProfileImageURL($size, $profile_image_url)
-    {
-        if (in_array($size, array('bigger', 'normal', 'mini'))) {
-            return str_replace('normal', $size, $profile_image_url);
-        }
-
-        return str_replace('_normal', '', $profile_image_url);
-    }
-
-    protected function parseData($profileData)
+    public function __construct($profileData)
     {
         $this->id = $profileData->id;
         $this->id_str = $profileData->id_str;
@@ -124,5 +83,15 @@ class Profile
         $this->following = $profileData->following;
         $this->follow_request_sent = $profileData->follow_request_sent;
         $this->notifications = $profileData->notifications;
+    }
+
+    public function getProfileImageURL()
+    {
+        return $this->profile_image_url;
+    }
+
+    public function getProfileImageHTTPSURL()
+    {
+        return $this->profile_image_url_https;
     }
 }
