@@ -24,12 +24,12 @@ class ProfileMapper
 
     public function read()
     {
-        if ($this->cache->hasData()) {
-            $data = $this->cache->fetch();
-
-        } else {
+        if ($this->cache->isStale()) {
             $data = $this->twitter->getProfileData();
             $this->cache->store($data);
+
+        } else {
+            $data = $this->cache->fetch();
         }
 
         return $data;

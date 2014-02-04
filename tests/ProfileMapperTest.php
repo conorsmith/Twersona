@@ -27,6 +27,7 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
         return $this->getMockBuilder('Twersona\CacheInterface')
             ->disableOriginalConstructor()
             ->setMethods(array(
+                'isStale',
                 'hasData',
                 'fetch',
                 'store',
@@ -49,7 +50,7 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
     public function constructorAcceptsArrayAsFirstParam()
     {
         /*
-        TODO - I'm not sure how to test this yet, the literla class name is
+        TODO - I'm not sure how to test this yet, the literal class name is
                causing dependency issues. Perhaps a DIC is the solution?
 
         $connectionSettings = array(
@@ -68,8 +69,8 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
         $expectedData = '{"data":"A Twitter profile..."}';
 
         $this->mockCache->expects($this->once())
-            ->method('hasData')
-            ->will($this->returnValue(true));
+            ->method('isStale')
+            ->will($this->returnValue(false));
 
         $this->mockCache->expects($this->once())
             ->method('fetch')
@@ -92,8 +93,8 @@ class ProfileMapperTest extends \PHPUnit_Framework_TestCase
         $expectedData = '{"data":"A Twitter profile..."}';
 
         $this->mockCache->expects($this->once())
-            ->method('hasData')
-            ->will($this->returnValue(false));
+            ->method('isStale')
+            ->will($this->returnValue(true));
 
         $this->mockTwitter->expects($this->once())
             ->method('getProfileData')

@@ -8,11 +8,23 @@ class ProfileCache implements CacheInterface
 {
     protected $filesystem;
     protected $key;
+    protected $maxAge;
 
-    public function __construct(Filesystem $filesystem, $key)
+    public function __construct(Filesystem $filesystem, $key, $maxAge)
     {
         $this->filesystem = $filesystem;
         $this->key = $key;
+    }
+
+    public function isStale()
+    {
+        if (!$this->hasData()) {
+            return true;
+        }
+
+        $timestamp = $this->filesystem->getTimestamp($this->key);
+
+        return $timestamp + $this->maxAge <= time();
     }
 
     public function hasData()

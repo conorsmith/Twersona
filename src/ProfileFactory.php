@@ -12,17 +12,18 @@ class ProfileFactory
 {
     protected $mapper;
 
-    public function __construct(array $twitterAPISettings, Filesystem $filesystem = null, $filesystemKey = null)
+    public function __construct(
+        array $twitterAPISettings,
+        Filesystem $filesystem = null,
+        $filesystemKey = 'twitter-profile-cache',
+        $cacheMaxAge = 86400
+    )
     {
         if (is_null($filesystem)) {
             $filesystem = new Filesystem(new Adapter(__DIR__.'/../storage'));
         }
 
-        if (is_null($filesystemKey)) {
-            $filesystemKey = 'twitter-profile-cache';
-        }
-
-        $this->mapper = new ProfileMapper($twitterAPISettings, new ProfileCache($filesystem, $filesystemKey));
+        $this->mapper = new ProfileMapper($twitterAPISettings, new ProfileCache($filesystem, $filesystemKey, $cacheMaxAge));
     }
 
     public function buildProfile()

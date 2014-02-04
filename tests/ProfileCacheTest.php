@@ -10,8 +10,9 @@ class ProfileCacheTest extends \PHPUnit_Framework_TestCase
     {
         $this->mockFilesystem = $this->setUpMockFilesystem();
         $this->key = 'test_key';
+        $this->maxAge = 86400;
 
-        $this->profileCache = new ProfileCache($this->mockFilesystem, $this->key);
+        $this->profileCache = new ProfileCache($this->mockFilesystem, $this->key, $this->maxAge);
     }
 
     private function setUpMockFilesystem()
