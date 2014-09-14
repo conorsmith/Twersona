@@ -7,18 +7,9 @@ class ProfileMapper
     protected $twitter;
     protected $cache;
 
-    public function __construct($connectionSettings, CacheInterface $cache)
+    public function __construct(TwitterConsumer $twitter, CacheInterface $cache)
     {
-        if ($connectionSettings instanceof TwitterAPI) {
-            $this->twitter = $connectionSettings;
-
-        } else if (is_array($connectionSettings)) {
-            $this->twitter = new TwitterAPI($connectionSettings);
-
-        } else {
-            throw new \InvalidArgumentException('The parameter was not an array or an instance of TwitterAPI');
-        }
-
+        $this->twitter = $twitter;
         $this->cache = $cache;
     }
 

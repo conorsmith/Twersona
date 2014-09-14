@@ -23,7 +23,10 @@ class ProfileFactory
             $filesystem = new Filesystem(new Adapter(__DIR__.'/../storage'));
         }
 
-        $this->mapper = new ProfileMapper($twitterAPISettings, new ProfileCache($filesystem, $filesystemKey, $cacheMaxAge));
+        $this->mapper = new ProfileMapper(
+            new TwitterConsumer($twitterAPISettings),
+            new ProfileCache($filesystem, $filesystemKey, $cacheMaxAge)
+        );
     }
 
     public function buildProfile()
@@ -33,14 +36,12 @@ class ProfileFactory
 
     public function buildFlatProfile()
     {
-        $profileData = $this->getProfileData();
-        return new FlatProfile($profileData);
+        return new FlatProfile($this->getProfileData());
     }
 
     public function buildFlatProfileWithExactKeys()
     {
-        $profileData = $this->getProfileData();
-        return new FlatExactKeysProfile($profileData);
+        return new FlatExactKeysProfile($this->getProfileData());
     }
 
     protected function getProfileData()
