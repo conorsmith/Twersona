@@ -1,7 +1,7 @@
 {
     "name": "conorsmith/twersona",
     "description": "A library to watch a Twitter profile for any updates to profile information",
-    "version": "0.2.1",
+    "version": "0.1.0",
     "keywords": ["twitter", "profile"],
     "homepage": "https://github.com/conorsmith/twersona",
     "license": "MIT",
@@ -13,7 +13,6 @@
         }
     ],
     "require": {
-    	"php": ">=5.4.0",
         "j7mbo/twitter-api-php": "dev-master",
         "league/flysystem": "0.2.*"
     },
